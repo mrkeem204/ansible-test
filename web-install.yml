@@ -1,0 +1,21 @@
+--- # This module will install apache web server
+-hosts: localhost
+- become: yes
+- 
+- name: install the latest version of Apache
+  yum:
+    name: httpd
+    state: latest
+
+- name: ensure a list of packages installed
+  yum:
+    name: "{{ packages }}"
+  vars:
+    packages:
+    - httpd
+    - httpd-tools
+
+- name: remove the Apache package
+  yum:
+    name: httpd
+    state: absent
